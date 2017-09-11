@@ -3,6 +3,7 @@ package web;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,9 +11,6 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
 
 import web.generales.IConstantes;
 
@@ -35,18 +33,28 @@ public class Conexion implements Serializable {
 	public Conexion() {
 		try {
 
-			InitialContext ctx = new InitialContext();
-			// para informix local
-			// java:/examenesDS
-			//DataSource ds = (DataSource) ctx.lookup("java:/vijagualDS");
+			// **************openshuftV3********************
+			String DB_driver = "org.postgresql.Driver";
 
-			DataSource ds = (DataSource) ctx.lookup("java:jboss/datasources/PostgreSQLDS");
+			String url = "jdbc:postgresql://postgresql:5432/produccion_vijagual";
+			String username = "dannypipe_vijagual";
+			String password = "meli0523_vijagual";
+			Class.forName(DB_driver);
+			con = DriverManager.getConnection(url, username, password);
+			// ***************************************
 
-			// para openshift postgres
-			// java:jboss/datasources/PostgreSQLDS
+			// *********Datasource_local***************************
+//			InitialContext ctx = new InitialContext();
+//			DataSource ds = (DataSource) ctx.lookup("java:/vijagualDS");
+//			con = ds.getConnection();
+			// ***************************************************
 
-			con = ds.getConnection();
-			con.setAutoCommit(true);
+			// **************openshuftV2********************
+			// InitialContext ctx = new InitialContext();
+			// DataSource ds = (DataSource)
+			// ctx.lookup("java:jboss/datasources/PostgreSQLDS");
+			// con = ds.getConnection();
+			// ***************************************************
 
 		} catch (Exception e) {
 			IConstantes.log.error(e, e);
