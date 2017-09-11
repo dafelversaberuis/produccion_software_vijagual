@@ -194,6 +194,30 @@
 
 
 	</build>
+	
+	
+	<profiles>
+		<profile>
+
+			<id>openshift</id>
+			<build>
+				<finalName>web</finalName>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<version>2.3</version>
+						<configuration>
+							<failOnMissingWebXml>false</failOnMissingWebXml>
+							<outputDirectory>target</outputDirectory>
+							<warName>web</warName>
+
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 
 
