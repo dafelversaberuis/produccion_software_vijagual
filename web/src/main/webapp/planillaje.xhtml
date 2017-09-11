@@ -1,0 +1,436 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/plantillas/principalNecesidadEspecifica.xhtml">
+
+	<ui:define name="body">
+		<h:form id="form">
+			<p:growl id="messages" showDetail="true" globalOnly="true" />
+			<section id="section-content" class="content page-26 moto-section"
+				data-widget="section" data-container="section">
+			<div class="moto-widget moto-widget-row row-fixed" data-widget="row">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="moto-cell col-sm-12" data-container="container">
+							<div
+								class="moto-widget moto-widget-text moto-preset-default            moto-spacing-top-large moto-spacing-right-auto moto-spacing-bottom-medium moto-spacing-left-auto"
+								data-widget="text" data-preset="default" data-spacing="lama">
+								<div class="moto-widget-text-content moto-widget-text-editable">
+									<p style="text-align: center;" class="moto-text_system_6">
+										#{mensaje.planillaje}<br />
+										<p:outputLabel
+											value="#{mensaje.teRespondemosProntoPlanillaje}"
+											style="font-size:10px" />
+									</p>
+								</div>
+							</div>
+
+							<div
+								class="moto-widget moto-widget-text moto-preset-default       moto-spacing-top-auto moto-spacing-right-auto moto-spacing-bottom-small moto-spacing-left-auto"
+								data-widget="text" data-preset="default" data-spacing="aasa">
+								<div class="moto-widget-text-content moto-widget-text-editable">
+									<p class="moto-text_system_10">
+
+										<p:outputLabel value="#{mensaje.unoPlanillaje}"
+											style="font-weight:bold; font-size:20px;color:red" />
+										<br /> <br />
+
+
+										<p:panelGrid style="width:100%" columns="4" cellpadding="0"
+											cellspacing="0" styleClass="ui-panelgrid-blank">
+
+
+											<p:outputLabel for="txtFecha"
+												value="#{mensaje.fechaSolicitud}"
+												style="font-weight:bold; font-size:14px" />
+
+											<p:inputText id="txtFecha" readonly="true"
+												value="#{administrarContenido.planillaje.fecha}"
+												required="true" label="#{mensaje.fechaPqr}"
+												style="width:100%; font-size:14px; background-color:#D3D3D3" />
+
+
+
+
+
+											<p:outputLabel for="txtCedula" value="#{mensaje.cedulaPqr}"
+												style="font-weight:bold; font-size:14px" />
+											<p:inputText id="txtCedula"
+												value="#{administrarContenido.planillaje.clientePlanillaje.cedula}"
+												required="true" label="#{mensaje.cedulaPqr}"
+												style="width:100%; font-size:14px" />
+
+
+
+
+
+
+											<p:outputLabel for="txtNombre" value="#{mensaje.nombresPqr}"
+												style="font-weight:bold; font-size:14px" />
+											<p:inputText id="txtNombre"
+												value="#{administrarContenido.planillaje.clientePlanillaje.nombres}"
+												required="true" label="#{mensaje.nombresPqr}"
+												style="width:100%; font-size:14px" />
+
+
+
+
+
+
+											<p:outputLabel for="txtTelefonos"
+												value="#{mensaje.telefonosPqr}"
+												style="font-weight:bold; font-size:14px" />
+											<p:inputText id="txtTelefonos"
+												value="#{administrarContenido.planillaje.clientePlanillaje.telefonos}"
+												required="true" label="#{mensaje.telefonosPqr}"
+												style="width:100%; font-size:14px" />
+
+
+
+											<p:outputLabel for="txtCorreo"
+												value="#{mensaje.correoPlanillaje}"
+												style="font-weight:bold; font-size:14px" />
+
+											<p:inputText id="txtCorreo"
+												value="#{administrarContenido.planillaje.clientePlanillaje.correo}"
+												label="#{mensaje.correoPqr}"
+												style="width:100%; font-size:14px" />
+
+
+
+
+
+
+
+
+
+
+
+											<p:spacer width="1" />
+											<p:message for="txtTelefonos" />
+											<p:spacer width="1" />
+											<p:message for="txtCorreo" />
+
+
+										</p:panelGrid>
+
+
+										<br /> <br />
+
+										<p:outputLabel value="#{mensaje.dosProporcioneAnimal}"
+											style="font-weight:bold; font-size:20px;color:red" />
+										<br /> <br />
+										<p:dataTable var="loc" id="datlAnimales" rowIndexVar="indice"
+											value="#{administrarContenido.planillajes}" reflow="true"
+											emptyMessage="#{mensaje.noExistenciaRegistros}">
+
+
+											<p:column headerText=""
+												style="font-size:14px; text-align:center; width:50px">
+
+												<p:outputLabel
+													value="#{administrarContenido.getLetra(indice)}"
+													style="font-size:14px;" />
+
+
+											</p:column>
+
+											<p:column headerText="#{mensaje.animalNumero}* "
+												sortBy="#{loc.animal}" style="font-size:14px">
+												<p:inputText id="txtAnimal" value="#{loc.animal}"
+													required="true" label="#{mensaje.animalNumero}"
+													style="width:100%; font-size:14px">
+
+													<p:ajax process="@this" />
+
+												</p:inputText>
+												<p:message for="txtAnimal" />
+											</p:column>
+
+
+											<p:column headerText="#{mensaje.sexo}*" sortBy="#{loc.sexo}"
+												style="font-size:14px">
+
+												<p:selectOneMenu label="#{mensaje.sexo}"
+													style="width:100%; font-size:14px; " id="lstSexo"
+													required="true" value="#{loc.sexo}">
+
+													<f:selectItem itemValue="" itemLabel="-" />
+													<f:selectItem itemValue="Masculino"
+														itemLabel="#{mensaje.masculino}" />
+													<f:selectItem itemValue="Femenino"
+														itemLabel="#{mensaje.femenino}" />
+
+													<p:ajax process="@this" />
+
+												</p:selectOneMenu>
+
+												<p:message for="lstSexo" />
+
+											</p:column>
+
+											<p:column headerText="#{mensaje.especie}*"
+												sortBy="#{loc.especie}" style="font-size:14px">
+												<p:selectOneMenu label="#{mensaje.especie}"
+													style="width:100%; font-size:14px; " id="lstEspecie"
+													required="true" value="#{loc.especie}">
+
+													<f:selectItem itemValue="" itemLabel="-" />
+													<f:selectItem itemValue="Bovino"
+														itemLabel="#{mensaje.bovino}" />
+													<f:selectItem itemValue="Porcino"
+														itemLabel="#{mensaje.porcino}" />
+
+													<p:ajax process="@this" />
+
+												</p:selectOneMenu>
+
+												<p:message for="lstEspecie" />
+
+											</p:column>
+
+											<p:column headerText="#{mensaje.pesoVivo}"
+												sortBy="#{loc.pesoVivo}" style="font-size:14px">
+												<p:inputText id="txtPesoViso" value="#{loc.pesoVivo}"
+													label="#{mensaje.pesoVivo}"
+													style="width:100%; font-size:14px">
+
+													<p:ajax process="@this" />
+
+												</p:inputText>
+
+												<p:message for="txtPesoViso" />
+											</p:column>
+
+											<p:column headerText="#{mensaje.corralActual}"
+												sortBy="#{loc.corralActual}" style="font-size:14px">
+
+												<p:inputText id="txtCorralActual"
+													value="#{loc.corralActual}" label="#{mensaje.corralActual}"
+													style="width:100%; font-size:14px">
+
+													<p:ajax process="@this" />
+
+												</p:inputText>
+
+												<p:message for="txtCorralActual" />
+
+											</p:column>
+
+
+											<p:column headerText="#{mensaje.puestoCarne1}"
+												sortBy="#{loc.puestoCarne1}" style="font-size:14px">
+
+												<p:inputText id="txtPuesto1" value="#{loc.puestoCarne1}"
+													label="#{mensaje.puestoCarne1}"
+													style="width:100%; font-size:14px">
+
+													<p:ajax process="@this" />
+
+												</p:inputText>
+
+												<p:message for="txtPuesto1" />
+
+											</p:column>
+
+											<p:column headerText="#{mensaje.puestoCarne2}"
+												sortBy="#{loc.puestoCarne2}" style="font-size:14px">
+
+												<p:inputText id="txtPuesto2" value="#{loc.puestoCarne2}"
+													label="#{mensaje.puestoCarne2}"
+													style="width:100%; font-size:14px">
+
+													<p:ajax process="@this" />
+
+												</p:inputText>
+
+												<p:message for="txtPuesto2" />
+
+											</p:column>
+
+
+											<p:column headerText="#{mensaje.puestoViscera}"
+												sortBy="#{loc.puestoViscera}" style="font-size:14px">
+
+												<p:inputText id="txtPuestoViscera"
+													value="#{loc.puestoViscera}"
+													label="#{mensaje.puestoViscera}"
+													style="width:100%; font-size:14px">
+
+													<p:ajax process="@this" />
+
+
+												</p:inputText>
+
+
+											</p:column>
+
+
+
+
+											<p:column headerText="#{mensaje.destinoPiel}"
+												sortBy="#{loc.destinoPiel}" style="font-size:14px">
+
+												<p:inputText id="txtPiel" value="#{loc.destinoPiel}"
+													label="#{mensaje.destinoPiel}"
+													style="width:100%; font-size:14px">
+
+													<p:ajax process="@this" />
+
+												</p:inputText>
+
+
+												<p:message for="txtPiel" />
+
+											</p:column>
+
+
+
+
+											<p:column headerText=""
+												rendered="#{administrarContenido.planillajes!=null and administrarContenido.planillajes.size()>1}"
+												style="font-size:14px; text-align:center; width:50px">
+
+
+												<p:commandButton id="btnIrEliminar"
+													style="background-origin: content-box; background-image: url('imagenes/borrar.png'); background-size: cover; background-repeat:no-repeat; width:16px; height:16px; vertical-align:bottom; border:0; background-color:transparent"
+													value="" title="#{mensaje.eliminar}"
+													action="#{administrarContenido.quitarPlanilla(loc)}"  
+													process="@this" update=":form:datlAnimales, :form:messages" />
+
+												
+
+
+											</p:column>
+
+
+										</p:dataTable>
+										
+										<br />
+
+										<p:commandButton value="#{mensaje.agregarOtroAnimal}"
+											id="btnAgregar"
+											class="moto-widget-button-link moto-size-small"
+											action="#{administrarContenido.agregarPlanilla()}"
+											process="@this" update=":form:datlAnimales, :form:messages" />
+
+
+										<br /> <br />
+										<p:outputLabel value="#{mensaje.poseeAdjuntoPlanillaje}"
+											style="font-weight:bold; font-size:20px;color:red" />
+										<br /> <br />
+
+
+										<p:panelGrid style="width:100%" columns="4" cellpadding="0"
+											cellspacing="0" styleClass="ui-panelgrid-blank">
+
+
+											<p:outputLabel for="lstPosee" value="#{mensaje.adjunto}"
+												style="font-weight:bold; font-size:14px" />
+
+
+
+											<p:selectOneMenu label="#{mensaje.poseeAdjuntoPlanillaje}"
+												style="width:100%; font-size:14px; " id="lstPosee"
+												required="true"
+												value="#{administrarContenido.planillaje.tPoseeAdjunto}">
+
+												<f:selectItem itemValue="" itemLabel="#{mensaje.seleccione}" />
+
+												<f:selectItem itemValue="S" itemLabel="#{mensaje.siPqr}" />
+
+												<f:selectItem itemValue="N" itemLabel="#{mensaje.noPqr}" />
+
+												<p:ajax event="change" update="pnlCargado, pnlCargado2"
+													process="@this" />
+
+											</p:selectOneMenu>
+
+
+											<p:outputPanel id="pnlCargado2">
+												<p:outputLabel for="fileCrear"
+													value="#{mensaje.archivoPqrs}"
+													rendered="#{administrarContenido.planillaje.tPoseeAdjunto=='S'}"
+													style="font-weight:bold; font-size:14px" />
+											</p:outputPanel>
+
+											<p:outputPanel id="pnlCargado">
+												<p:panelGrid columns="5" style="width:100%;"
+													rendered="#{administrarContenido.planillaje.tPoseeAdjunto=='S'}"
+													styleClass="ui-panelgrid-blank">
+													<p:fileUpload id="fileCrear" cancelLabel="true"
+														dragDropSupport="true" style="width:100%;"
+														rendered="#{administrarContenido.planillaje.tFile==null}"
+														fileUploadListener="#{administrarContenido.recibirArchivo3}"
+														multiple="false" fileLimit="1"
+														fileLimitMessage="#{mensaje.solo1Archivo}"
+														label="#{mensaje.busquePqrs}" required="true"
+														mode="advanced" update=":form:messages, pnlCargado"
+														auto="true" sizeLimit="5000000"
+														requiredMessage="#{mensaje.infoRequerida}"
+														invalidSizeMessage="#{mensaje.excede2}"
+														invalidFileMessage="#{mensaje.extensionIncorrecta}"
+														allowTypes="/(\.|\/)(pdf|doc|docx|jpg|jpeg|jp?g|gif|png|JPG|JP?G|GIF|PNG)$/" />
+
+
+													<p:outputLabel
+														value="#{administrarContenido.planillaje.tFile.fileName}"
+														rendered="#{administrarContenido.planillaje.archivo != null}" />
+
+													<p:commandLink value="#{mensaje.limpiar}"
+														style="font-weight:bold; font-size:14px"
+														action="#{administrarContenido.limpiarArchivoCargado3()}"
+														process="@this" update="pnlCargado"
+														rendered="#{administrarContenido.planillaje.archivo != null}" />
+
+													<p:graphicImage value="imagenes/ayuda.png"
+														id="ayudaCargarArchivo" />
+													<p:tooltip value="#{mensaje.soloExtension}"
+														trackMouse="true" for="ayudaCargarArchivo" />
+												</p:panelGrid>
+
+
+											</p:outputPanel>
+
+											<p:spacer width="1" />
+											<p:message for="lstPosee" />
+
+										</p:panelGrid>
+									<div
+										class="moto-widget moto-widget-button moto-preset-default moto-align-center"
+										data-preset="default" data-align="center">
+
+
+										<p:commandButton value="#{mensaje.enviarSoliictudPlanillaje}"
+											id="btnEnviar"
+											class="moto-widget-button-link moto-size-medium"
+											action="#{administrarContenido.enviarPlanillaje()}"
+											process=":form" update=":form" />
+
+										<p:blockUI block=":form" trigger="btnEnviar">
+
+											<p:graphicImage value="imagenes/cargando.gif" />
+
+
+										</p:blockUI>
+
+
+									</div>
+
+
+
+									</p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			</section>
+		</h:form>
+	</ui:define>
+</ui:composition>

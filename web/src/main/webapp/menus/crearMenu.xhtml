@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/plantillas/principal.xhtml">
+
+	<ui:define name="body">
+		<h:form id="form">
+			<p:growl id="messages" showDetail="true" globalOnly="true" />
+			<br />
+
+
+			<div class="row x_title">
+				<div class="col-md-6">
+
+					<h2 class="project-title">Administrar Menús mostrados a los usuarios</h2>
+
+				</div>
+			</div>
+
+			<div align="center" class="titulo"></div>
+			<p:outputPanel id="pnlCasoUso">
+				<p:spacer height="10" />
+				<p:accordionPanel id="pnlCrearCasoUso" activeIndex="1">
+					<p:tab title="#{mensaje.crearMenu}" titleStyle="font-size:16px"
+						closable="true">
+
+						<p:panelGrid columns="4" cellpadding="0" cellspacing="0"
+							style="width:100%" styleClass="ui-panelgrid-blank" layout="grid">
+
+
+							<p:outputLabel for="txtTitulo" value="#{mensaje.tituloMenu}"
+								style="font-weight:bold; font-size:14px" />
+							<p:inputText id="txtTitulo"
+								value="#{administrarContenido.menu.titulo}" required="true"
+								label="#{mensaje.tituloMenu}"
+								style="width:100%; font-size:14px; height:10px" />
+
+
+
+							<p:outputLabel for="txtTituloIngles"
+								value="#{mensaje.tituloMenuIngles}"
+								style="font-weight:bold; font-size:14px" />
+							<p:inputText id="txtTituloIngles"
+								value="#{administrarContenido.menu.tituloIngles}"
+								label="#{mensaje.tituloMenuIngles}"
+								style="width:100%; font-size:14px; height:10px" />
+
+
+							<p:spacer width="1" />
+							<p:message for="txtTitulo" />
+							<p:spacer width="1" />
+							<p:message for="txtTituloIngles" />
+
+
+
+
+						</p:panelGrid>
+
+						<p:spacer height="10" />
+						<div align="center">
+
+
+							<p:commandButton id="btnCrearCasoUso"
+								action="#{administrarContenido.crearMenu()}"
+								style="font-size:14px" process=":form:pnlCrearCasoUso"
+								value="#{mensaje.guardar}"
+								update=":form:pnlCrearCasoUso, :form:pnlDtlMenus, :form:messages" />
+							<p:spacer width="10" />
+							<p:commandButton id="btnBorrarCasoUso"
+								action="#{administrarContenido.cancelarMenu()}"
+								style="font-size:14px; font-weight: normal !important;"
+								process="@this" value="#{mensaje.cancelar}"
+								update=":form:pnlCrearCasoUso">
+								<p:resetInput target=":form:pnlCasoUso" />
+							</p:commandButton>
+
+						</div>
+						<p:outputLabel value="#{mensaje.informacionRequerida}"
+							style="font-size:10px" />
+						<p:blockUI block=":form:pnlCrearCasoUso"
+							trigger="btnCrearCasoUso, btnBorrarCasoUso">
+							<p:graphicImage value="../imagenes/cargando.gif" />
+						</p:blockUI>
+					</p:tab>
+				</p:accordionPanel>
+
+
+				<p:spacer height="30" />
+				<p:accordionPanel id="pnlDtlMenus">
+					<p:tab title="#{mensaje.listadoMenus}" titleStyle="font-size:16px"
+						closable="true">
+
+						<p:dataTable var="loc" id="dtlMenus" widgetVar="dtlRegistros"
+							value="#{administrarContenido.menus}" reflow="true" rows="10"
+							paginator="true" paginatorPosition="bottom" draggableRows="true"
+							draggableColumns="true"
+							emptyMessage="#{mensaje.noExistenciaRegistros}">
+
+
+							<p:ajax event="rowReorder" process="@this"
+								listener="#{administrarContenido.onRowReorder}"
+								update=":form:messages" />
+
+
+
+							<f:facet name="header">
+								<p:outputPanel style="text-align:right">
+									<p:inputText id="globalFilter" immediate="true"
+										onkeyup="PF('dtlRegistros').filter()"
+										style="width:300px; height:10px"
+										placeholder="#{mensaje.palabrasClave}" />
+								</p:outputPanel>
+							</f:facet>
+
+
+							<p:column headerText="#{mensaje.tituloMenu}"
+								filterBy="#{loc.titulo}" filterMatchMode="contains"
+								filterStyle="display:none" sortBy="#{loc.titulo}"
+								style="font-size:14px">
+								<p:outputLabel value="#{loc.titulo}"
+									style="font-weight:normal; font-size:12px" />
+							</p:column>
+
+
+
+
+							<p:column headerText="#{mensaje.estado}"
+								sortBy="#{loc.indicativoVigencia}" style="font-size:14px;">
+								<p:outputLabel value="#{mensaje.ESTADO_ACTIVO}"
+									style="font-weight:normal; font-size:12px"
+									rendered="#{loc.indicativoVigencia == 'A'}" />
+								<p:outputLabel value="#{mensaje.ESTADO_INACTIVO}"
+									style="font-weight:normal; font-size:12px"
+									rendered="#{loc.indicativoVigencia == 'I'}" />
+							</p:column>
+
+							<p:column headerText="#{mensaje.poseeContenido}"
+								filterBy="#{loc.poseeContenido}" filterMatchMode="contains"
+								filterStyle="display:none" sortBy="#{loc.titulo}"
+								style="font-size:14px">
+								<p:outputLabel value="#{mensaje.SI} #{mensaje.noTieneSubmenus}"
+									style="font-weight:normal; font-size:12px"
+									rendered="#{loc.poseeContenido == 'S'}" />
+								<p:outputLabel value="#{mensaje.NO}"
+									style="font-weight:normal; font-size:12px"
+									rendered="#{loc.poseeContenido == 'N'}" />
+							</p:column>
+
+
+
+
+
+							<p:column headerText="#{mensaje.acciones}"
+								style="font-size:14px; text-align:center;">
+
+
+								<p:commandButton id="btnIrEditar"
+									style="background-origin: content-box; background-image: url('../imagenes/editar.png'); background-size: cover; background-repeat:no-repeat; width:16px; height:16px; vertical-align:bottom; border:0; background-color:transparent"
+									action="#{administrarContenido.asignarMenu(loc,'MODAL_EDITAR_MENU')}"
+									value="" process=":form:pnlDtlMenus" update=":formEditar" />
+
+
+								<p:tooltip for="btnIrEditar" value="#{mensaje.editar}"
+									trackMouse="true" />
+
+
+								<p:commandButton id="btnIrEliminar"
+									style="background-origin: content-box; background-image: url('../imagenes/borrar.png'); background-size: cover; background-repeat:no-repeat; width:16px; height:16px; vertical-align:bottom; border:0; background-color:transparent"
+									action="#{administrarContenido.asignarMenu(loc,'MODAL_ELIMINAR_MENU')}"
+									value="" process=":form:pnlDtlMenus" update=":formEliminar" />
+
+
+								<p:tooltip for="btnIrEliminar" value="#{mensaje.eliminar}"
+									trackMouse="true" />
+
+								<p:commandButton id="btnIrSubmenus"
+									rendered="#{loc.poseeContenido=='N'}"
+									style="background-origin: content-box; background-image: url('../imagenes/s_mayuscula.png'); background-size: cover; background-repeat:no-repeat; width:16px; height:16px; vertical-align:bottom; border:0; background-color:transparent"
+									action="#{administrarContenido.asignarMenu(loc,'MODAL_VER_SUBMENUS')}"
+									value="" process=":form:pnlDtlMenus" update=":formSubMenu" />
+
+
+								<p:tooltip for="btnIrSubmenus"
+									rendered="#{loc.poseeContenido=='N'}"
+									value="#{mensaje.submenus}" trackMouse="true" />
+
+
+
+
+
+
+							</p:column>
+
+
+
+						</p:dataTable>
+						<p:outputLabel value="#{mensaje.informacionReordenar}"
+							style="font-size:10px" />
+
+						<br />
+						<p:outputLabel value="***Los usuarios verán los menus extras: HOME, USUARIOS, CAMBIO DE IDIOMA que no se encuentran listados aquí y que no se pueden eliminar por ser menús del sistema"
+							style="font-size:10px" />
+
+
+					</p:tab>
+				</p:accordionPanel>
+
+			</p:outputPanel>
+		</h:form>
+
+		<ui:include src="/menus/editarMenu.xhtml" />
+		<ui:include src="/menus/eliminarMenu.xhtml" />
+
+		<ui:include src="/menus/crearSubMenu.xhtml" />
+		<ui:include src="/menus/editarSubMenu.xhtml" />
+		<ui:include src="/menus/eliminarSubMenu.xhtml" />
+
+		<p:spacer height="1000" />
+
+
+	</ui:define>
+</ui:composition>

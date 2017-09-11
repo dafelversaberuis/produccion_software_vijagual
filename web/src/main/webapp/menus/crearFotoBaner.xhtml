@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	template="/plantillas/principal.xhtml">
+
+	<ui:define name="body">
+
+		<h:form id="form">
+			<p:growl id="messages" showDetail="true" globalOnly="true" />
+			<br />
+			<div class="row x_title">
+				<div class="col-md-6">
+
+					<h2 class="project-title">Fotos del baner de la página Inicio</h2>
+
+				</div>
+			</div>
+
+			<p:outputPanel id="pnlFoto">
+
+
+
+				<p:accordionPanel id="pnlCrear" activeIndex="1">
+					<p:tab title="#{mensaje.crearFotoBaner}"
+						titleStyle="font-size:16px" closable="true">
+						<div align="left">
+							<p:panelGrid columns="2" cellpadding="0" cellspacing="0"
+								style="width:100%" styleClass="ui-panelgrid-blank" layout="grid">
+
+
+								<p:outputLabel for="txtNombre" value="#{mensaje.leyenda}"
+									style="font-weight:bold; font-size:14px" />
+								<p:inputText id="txtNombre"
+									value="#{administrarContenido.fotoBaner.leyenda}"
+									required="true" label="#{mensaje.leyenda}"
+									style="width:100%; font-size:14px; height:10px" />
+
+
+								<p:spacer width="1" />
+								<p:message for="txtNombre" />
+
+
+
+
+
+								<p:outputLabel for="fileCrear" value="#{mensaje.archivo}"
+									style="font-weight:bold; font-size:14px" />
+
+
+
+
+							</p:panelGrid>
+
+
+							<p:outputPanel id="pnlCargado">
+								<p:panelGrid columns="3" style="width:100%;"
+									styleClass="ui-panelgrid-blank">
+									<p:fileUpload id="fileCrear" cancelLabel="true"
+										dragDropSupport="true" style="width:100%;"
+										rendered="#{administrarContenido.fotoBaner.tFile==null}"
+										fileUploadListener="#{administrarContenido.recibirFotoBaner}"
+										multiple="false" fileLimit="1"
+										fileLimitMessage="Sólo 1 archivo"
+										label="#{mensaje.busqueArchivo}" required="true"
+										mode="advanced" update=":form:messages, pnlCargado"
+										auto="true" sizeLimit="5000000"
+										requiredMessage="Información requerida"
+										invalidSizeMessage="Excede el tamaño  permitido de 5012KB!"
+										invalidFileMessage="Extensión de archivo incorrecta, solo fotos"
+										allowTypes="/(\.|\/)(jpg|jp?g|gif|png|JPG|PNG|GIF|JP?EG)$/" />
+
+
+									<p:outputLabel
+										value="#{administrarContenido.fotoBaner.tFile.fileName}"
+										rendered="#{administrarContenido.fotoBaner.archivo != null}" />
+
+									<p:commandLink value="#{mensaje.limpiar}"
+										style="font-weight:bold; font-size:14px"
+										action="#{administrarContenido.limpiarFotoCargadaBaner()}"
+										process="@this" update="pnlCargado"
+										rendered="#{administrarContenido.fotoBaner.archivo != null}" />
+
+
+								</p:panelGrid>
+
+
+							</p:outputPanel>
+
+						</div>
+
+
+						<p:spacer height="10" />
+						<div align="center">
+							<p:commandButton id="btnCrear" style="font-size:14px;"
+								action="#{administrarContenido.crearFotoBaner()}"
+								value="#{mensaje.guardar}"
+								update=":form:pnlFoto, :form:messages" />
+
+							<p:spacer width="10" />
+							<p:commandButton id="btnBorrar"
+								style="font-size:14px; font-weight: normal; text-decoration: none !important;"
+								action="#{administrarContenido.cancelarFotoBaner()}"
+								process="@this" value="#{mensaje.cancelar}"
+								update=":form:pnlFoto">
+
+								<p:resetInput target=":form:pnlFoto, :form:messages" />
+
+							</p:commandButton>
+
+						</div>
+						<p:outputLabel value="#{mensaje.informacionRequerida}"
+							style="font-size:10px" />
+
+						<p:blockUI block=":form:pnlFoto" trigger="btnCrear, btnBorrar">
+
+							<p:graphicImage value="../imagenes/cargando.gif" />
+
+
+						</p:blockUI>
+					</p:tab>
+				</p:accordionPanel>
+
+				<p:spacer height="30" />
+				<p:accordionPanel id="pnlDtlFotos">
+					<p:tab title="#{mensaje.listadoFotosBaner}"
+						titleStyle="font-size:16px" closable="true">
+
+						<p:dataTable var="loc" id="dtlFotos"
+							value="#{administrarContenido.fotosBaners}" reflow="true"
+							rows="1" paginator="true" paginatorPosition="bottom"
+							draggableColumns="true"
+							emptyMessage="#{mensaje.noExistenciaRegistros}">
+
+
+							<p:column headerText="#{mensaje.leyenda}"
+								filterMatchMode="contains" filterStyle="display:none"
+								sortBy="#{loc.leyenda}" filterBy="#{loc.leyenda}"
+								style="font-size:14px; width:20%">
+								<p:outputLabel value="#{loc.leyenda}"
+									style="font-weight:normal; font-size:12px" />
+							</p:column>
+
+							<p:column headerText="#{mensaje.imagenOFoto}"
+								style="font-size:14px; width:70%; text-align:center">
+
+								
+									
+								<img src='data:image/png;base64,#{loc.tFotoDecodificada}' />	
+
+							</p:column>
+
+
+
+
+
+							<p:column headerText="#{mensaje.acciones}"
+								style="font-size:14px; text-align:center; width:10%">
+
+
+
+
+
+
+								<p:commandButton id="btnIrEliminar"
+									style="background-origin: content-box; background-image: url('../imagenes/borrar.png'); background-size: cover; background-repeat:no-repeat; width:16px; height:16px; vertical-align:bottom; border:0; background-color:transparent"
+									action="#{administrarContenido.asignarFotoBaner(loc,'MODAL_ELIMINAR_FOTO')}"
+									value="" process=":form:pnlDtlFotos" update=":formEliminarFoto" />
+
+
+								<p:tooltip for="btnIrEliminar" value="#{mensaje.eliminar}"
+									trackMouse="true" />
+
+							</p:column>
+
+
+						</p:dataTable>
+
+
+					</p:tab>
+				</p:accordionPanel>
+			</p:outputPanel>
+		</h:form>
+
+		<ui:include src="/menus/eliminarFotoBaner.xhtml" />
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="formSubMenu">
+
+		<p:dialog header="#{mensaje.submenus}" width="930" height="520"
+			widgetVar="panelVerSubMenu" resizable="true" closable="false"
+			responsive="true">
+
+			<p:outputPanel id="pnlSubMenu">
+
+
+
+				<p:accordionPanel id="pnlCrear" activeIndex="1">
+					<p:tab title="#{mensaje.crearSubMenu}" titleStyle="font-size:16px"
+						closable="true">
+						<div align="left">
+							<p:panelGrid columns="2" cellpadding="0" cellspacing="0"
+								style="width:100%" styleClass="ui-panelgrid-blank" layout="grid">
+
+
+								<p:outputLabel for="txtTitulo" value="#{mensaje.tituloMenu}"
+									style="font-weight:bold; font-size:14px" />
+								<p:inputText id="txtTitulo"
+									value="#{administrarContenido.submenu.titulo}" required="true"
+									label="#{mensaje.tituloMenu}"
+									style="width:100%; font-size:14px; height:10px" />
+
+								<p:spacer width="1" />
+								<p:message for="txtTitulo" />
+
+								<p:outputLabel for="txtTituloIngles"
+									value="#{mensaje.tituloMenuIngles}"
+									style="font-weight:bold; font-size:14px" />
+								<p:inputText id="txtTituloIngles"
+									value="#{administrarContenido.submenu.tituloIngles}"
+									label="#{mensaje.tituloMenuIngles}"
+									style="width:100%; font-size:14px; height:10px" />
+
+
+
+								<p:spacer width="1" />
+								<p:message for="txtTituloIngles" />
+
+
+
+
+
+
+							</p:panelGrid>
+							<p:panelGrid columns="1" cellpadding="0" cellspacing="0"
+								style="width:100%" styleClass="ui-panelgrid-blank" layout="grid">
+
+
+
+
+								<p:outputLabel for="txtContenido" value="#{mensaje.contenido}"
+									style="font-weight:bold; font-size:14px; " />
+
+
+
+								<p:editor value="#{administrarContenido.submenu.contenido}"
+									id="txtContenido" required="true"
+									style="width:100%; font-size:14px;" />
+
+								<p:spacer width="1" />
+
+
+								<p:message for="txtContenido" />
+
+								<p:outputLabel for="txtContenidoIngles"
+									value="#{mensaje.contenidoIngles}"
+									style="font-weight:bold; font-size:14px; " />
+
+								<p:editor
+									value="#{administrarContenido.submenu.contenidoIngles}"
+									style="width:100%; font-size:14px;" id="txtContenidoIngles" />
+
+
+								<p:spacer width="1" />
+
+								<p:message for="txtContenidoIngles" />
+
+
+							</p:panelGrid>
+						</div>
+
+
+						<p:spacer height="10" />
+						<div align="center">
+							<p:commandButton id="btnCrear" style="font-size:14px;"
+								action="#{administrarContenido.crearSubMenu()}"
+								value="#{mensaje.guardar}"
+								update=":formSubMenu:pnlSubMenu, :form:messages" />
+
+							<p:spacer width="10" />
+							<p:commandButton id="btnBorrar"
+								style="font-size:14px; font-weight: normal; text-decoration: none !important;"
+								action="#{administrarContenido.cancelarSubMenu()}"
+								process="@this" value="#{mensaje.regresar}"
+								update=":formSubMenu:pnlSubMenu">
+
+								<p:resetInput target=":formSubMenu:pnlSubMenu, :form:messages" />
+
+							</p:commandButton>
+
+						</div>
+						<p:outputLabel value="#{mensaje.informacionRequerida}"
+							style="font-size:10px" />
+
+						<p:blockUI block=":formSubMenu:pnlSubMenu"
+							trigger="btnCrear, btnBorrar">
+
+							<p:graphicImage value="../imagenes/cargando.gif" />
+
+
+						</p:blockUI>
+					</p:tab>
+				</p:accordionPanel>
+
+				<p:spacer height="30" />
+				<p:accordionPanel id="pnlDtlSubMenus">
+					<p:tab title="#{mensaje.listadoSubMenus}"
+						titleStyle="font-size:16px" closable="true">
+
+						<p:dataTable var="loc" id="dtlSubMenus"
+							value="#{administrarContenido.submenus}" reflow="true" rows="10"
+							paginator="true" paginatorPosition="bottom"
+							draggableColumns="true" draggableRows="true"
+							emptyMessage="#{mensaje.noExistenciaRegistros}">
+
+
+							<p:ajax event="rowReorder" process="@this"
+								listener="#{administrarContenido.onRowReorderS}"
+								update=":form:messages" />
+
+
+							<p:column headerText="#{mensaje.tituloSubMenu}"
+								filterBy="#{loc.titulo}" filterMatchMode="contains"
+								filterStyle="display:none" sortBy="#{loc.titulo}"
+								style="font-size:14px">
+								<p:outputLabel value="#{loc.titulo}"
+									style="font-weight:normal; font-size:12px" />
+							</p:column>
+
+
+
+
+							<p:column headerText="#{mensaje.estado}"
+								sortBy="#{loc.indicativoVigencia}" style="font-size:14px;">
+								<p:outputLabel value="#{mensaje.ESTADO_ACTIVO}"
+									style="font-weight:normal; font-size:12px"
+									rendered="#{loc.indicativoVigencia == 'A'}" />
+								<p:outputLabel value="#{mensaje.ESTADO_INACTIVO}"
+									style="font-weight:normal; font-size:12px"
+									rendered="#{loc.indicativoVigencia == 'I'}" />
+							</p:column>
+
+
+
+
+
+							<p:column headerText="#{mensaje.acciones}"
+								style="font-size:14px; text-align:center;">
+
+								<p:commandButton id="btnIrEditar"
+									style="background-origin: content-box; background-image: url('../imagenes/editar.png'); background-size: cover; background-repeat:no-repeat; width:16px; height:16px; vertical-align:bottom; border:0; background-color:transparent"
+									action="#{administrarContenido.asignarSubmenu(loc,'MODAL_EDITAR_SUBMENU')}"
+									value="" process=":formSubMenu:pnlDtlSubMenus"
+									update=":formEditarSubMenu" />
+
+
+								<p:tooltip for="btnIrEditar" value="#{mensaje.editar}"
+									trackMouse="true" />
+
+
+								<p:commandButton id="btnIrEliminar"
+									style="background-origin: content-box; background-image: url('../imagenes/borrar.png'); background-size: cover; background-repeat:no-repeat; width:16px; height:16px; vertical-align:bottom; border:0; background-color:transparent"
+									action="#{administrarContenido.asignarSubmenu(loc,'MODAL_ELIMINAR_SUBMENU')}"
+									value="" process=":formSubMenu:pnlDtlSubMenus"
+									update=":formEliminarSubMenu" />
+
+
+								<p:tooltip for="btnIrEliminar" value="#{mensaje.eliminar}"
+									trackMouse="true" />
+
+							</p:column>
+
+
+						</p:dataTable>
+						<p:outputLabel value="#{mensaje.informacionReordenar}"
+							style="font-size:10px" />
+<br/><br/>
+						<div align="center">
+							
+							<p:commandButton id="btnBorrar2"
+								style="font-size:14px; font-weight: normal; text-decoration: none !important;"
+								action="#{administrarContenido.cancelarSubMenu()}"
+								process="@this" value="#{mensaje.regresar}"
+								update=":formSubMenu:pnlSubMenu">
+
+								<p:resetInput target=":formSubMenu:pnlSubMenu, :form:messages" />
+
+							</p:commandButton>
+
+						</div>
+
+					</p:tab>
+				</p:accordionPanel>
+
+			</p:outputPanel>
+
+		</p:dialog>
+	</h:form>
+
+
+</ui:composition>

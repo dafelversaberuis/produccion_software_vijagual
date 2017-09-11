@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/plantillas/principalNecesidadEspecifica.xhtml">
+
+	<ui:define name="body">
+		<h:form id="form">
+			<p:growl id="messages" showDetail="true" globalOnly="true" />
+			<section id="section-content" class="content page-26 moto-section"
+				data-widget="section" data-container="section">
+			<div class="moto-widget moto-widget-row row-fixed" data-widget="row">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="moto-cell col-sm-12" data-container="container">
+							<div
+								class="moto-widget moto-widget-text moto-preset-default            moto-spacing-top-large moto-spacing-right-auto moto-spacing-bottom-medium moto-spacing-left-auto"
+								data-widget="text" data-preset="default" data-spacing="lama">
+								<div class="moto-widget-text-content moto-widget-text-editable">
+									<p style="text-align: center;" class="moto-text_system_6">
+										#{mensaje.pqrs}<br />
+										<p:outputLabel value="#{mensaje.teRespondemosPronto}"
+											style="font-size:10px" />
+									</p>
+								</div>
+							</div>
+
+							<div
+								class="moto-widget moto-widget-text moto-preset-default       moto-spacing-top-auto moto-spacing-right-auto moto-spacing-bottom-small moto-spacing-left-auto"
+								data-widget="text" data-preset="default" data-spacing="aasa">
+								<div class="moto-widget-text-content moto-widget-text-editable">
+									<p class="moto-text_system_10">
+
+										<p:panelGrid style="width:100%" columns="6" cellpadding="0"
+											cellspacing="0" styleClass="ui-panelgrid-blank">
+
+
+											<p:outputLabel for="txtFecha" value="#{mensaje.fechaSolicitud}"
+												style="font-weight:bold; font-size:14px" />
+
+											<p:inputText id="txtFecha" readonly="true"
+												value="#{administrarContenido.pqr.fecha}" required="true"
+												label="#{mensaje.fechaPqr}"
+												style="width:100%; font-size:14px; background-color:#D3D3D3" />
+
+
+
+											<p:outputLabel for="lstTipoCliente"
+												value="#{mensaje.tipoCliente}"
+												style="font-weight:bold; font-size:14px" />
+
+
+
+											<p:selectOneMenu label="#{mensaje.tipoCliente}"
+												style="width:100%; font-size:14px; " id="lstTipoCliente"
+												required="true"
+												value="#{administrarContenido.pqr.tipoCliente}">
+
+												<f:selectItem itemValue="" itemLabel="#{mensaje.seleccione}" />
+												<f:selectItem itemValue="#{mensaje.externo}"
+													itemLabel="#{mensaje.externo}" />
+												<f:selectItem itemValue="#{mensaje.interno}"
+													itemLabel="#{mensaje.interno}" />
+
+
+
+											</p:selectOneMenu>
+
+
+
+											<p:outputLabel for="lstTipoPqr" value="#{mensaje.tipoPqr}"
+												style="font-weight:bold; font-size:14px" />
+
+
+
+											<p:selectOneMenu label="#{mensaje.tipoPqr}"
+												style="width:100%; font-size:14px; " id="lstTipoPqr"
+												required="true" value="#{administrarContenido.pqr.tipoPqr}">
+
+												<f:selectItem itemValue="" itemLabel="#{mensaje.seleccione}" />
+
+												<f:selectItem itemValue="#{mensaje.peticion}"
+													itemLabel="#{mensaje.peticion}" />
+
+												<f:selectItem itemValue="#{mensaje.queja}"
+													itemLabel="#{mensaje.queja}" />
+
+												<f:selectItem itemValue="#{mensaje.reclamo}"
+													itemLabel="#{mensaje.reclamo}" />
+
+												<f:selectItem itemValue="#{mensaje.felicitacion}"
+													itemLabel="#{mensaje.felicitacion}" />
+
+
+
+											</p:selectOneMenu>
+
+											<p:spacer width="1" />
+											<p:spacer width="1" />
+											<p:spacer width="1" />
+											<p:message for="lstTipoCliente" />
+											<p:spacer width="1" />
+											<p:message for="lstTipoPqr" />
+
+
+											<p:outputLabel for="lstArea" value="#{mensaje.areaPqr}"
+												style="font-weight:bold; font-size:14px" />
+
+											<p:selectOneMenu label="#{mensaje.areaPqr}"
+												style="width:100%; font-size:14px; " id="lstArea"
+												required="true" value="#{administrarContenido.pqr.area.id}">
+
+
+
+												<f:selectItems value="#{administrarRol.itemsAreas}" />
+
+												<f:selectItem itemValue="-1"
+													itemLabel="#{mensaje.noListado}" />
+
+
+
+
+
+											</p:selectOneMenu>
+
+
+
+
+											<p:outputLabel for="txtNombre" value="#{mensaje.nombresPqr}"
+												style="font-weight:bold; font-size:14px" />
+											<p:inputText id="txtNombre"
+												value="#{administrarContenido.pqr.nombres}" required="true"
+												label="#{mensaje.nombresPqr}"
+												style="width:100%; font-size:14px" />
+
+
+
+											<p:outputLabel for="txtCedula" value="#{mensaje.cedulaPqr}"
+												style="font-weight:bold; font-size:14px" />
+											<p:inputText id="txtCedula"
+												value="#{administrarContenido.pqr.cedula}" required="true"
+												label="#{mensaje.cedulaPqr}"
+												style="width:100%; font-size:14px" />
+
+
+
+											<p:spacer width="1" />
+											<p:message for="lstTipoPqr" />
+											<p:spacer width="1" />
+											<p:message for="txtNombre" />
+											<p:spacer width="1" />
+											<p:message for="txtCedula" />
+
+											<p:outputLabel for="txtTelefonos"
+												value="#{mensaje.telefonosPqr}"
+												style="font-weight:bold; font-size:14px" />
+											<p:inputText id="txtTelefonos"
+												value="#{administrarContenido.pqr.telefonos}"
+												required="true" label="#{mensaje.telefonosPqr}"
+												style="width:100%; font-size:14px" />
+
+
+											<p:outputLabel for="txtCiudad" value="#{mensaje.ciudad}"
+												style="font-weight:bold; font-size:14px" />
+											<p:inputText id="txtCiudad"
+												value="#{administrarContenido.pqr.ciudad}" required="true"
+												label="#{mensaje.ciudad}" style="width:100%; font-size:14px" />
+
+
+											<p:outputLabel for="txtDireccion"
+												value="#{mensaje.direccion}"
+												style="font-weight:bold; font-size:14px" />
+
+											<p:inputText id="txtDireccion"
+												value="#{administrarContenido.pqr.direccion}"
+												label="#{mensaje.direccion}"
+												style="width:100%; font-size:14px" />
+
+											<p:spacer width="1" />
+											<p:message for="txtTelefonos" />
+											<p:spacer width="1" />
+											<p:message for="txtCiudad" />
+											<p:spacer width="1" />
+											<p:message for="txtDireccion" />
+
+
+											<p:outputLabel for="txtCorreo" value="#{mensaje.correoPqr}"
+												style="font-weight:bold; font-size:14px" />
+
+											<p:inputText id="txtCorreo"
+												value="#{administrarContenido.pqr.correo}"
+												label="#{mensaje.correoPqr}"
+												style="width:100%; font-size:14px" />
+
+
+
+											<p:outputLabel for="lstPosee"
+												value="#{mensaje.poseeAdjuntoPqr}"
+												style="font-weight:bold; font-size:14px" />
+
+
+
+											<p:selectOneMenu label="#{mensaje.poseeAdjuntoPqr}"
+												style="width:100%; font-size:14px; " id="lstPosee"
+												required="true"
+												value="#{administrarContenido.pqr.tPoseeAdjunto}">
+
+												<f:selectItem itemValue="" itemLabel="#{mensaje.seleccione}" />
+
+												<f:selectItem itemValue="S" itemLabel="#{mensaje.siPqr}" />
+
+												<f:selectItem itemValue="N" itemLabel="#{mensaje.noPqr}" />
+
+												<p:ajax event="change" update="pnlCargado, pnlCargado2"
+													process="@this" />
+
+											</p:selectOneMenu>
+											<p:outputPanel id="pnlCargado2">
+												<p:outputLabel for="fileCrear"
+													value="#{mensaje.archivoPqrs}"
+													rendered="#{administrarContenido.pqr.tPoseeAdjunto=='S'}"
+													style="font-weight:bold; font-size:14px" />
+											</p:outputPanel>
+
+											<p:outputPanel id="pnlCargado">
+												<p:panelGrid columns="5" style="width:100%;"
+													rendered="#{administrarContenido.pqr.tPoseeAdjunto=='S'}"
+													styleClass="ui-panelgrid-blank">
+													<p:fileUpload id="fileCrear" cancelLabel="true"
+														dragDropSupport="true" style="width:100%;"
+														rendered="#{administrarContenido.pqr.tFile==null}"
+														fileUploadListener="#{administrarContenido.recibirArchivo}"
+														multiple="false" fileLimit="1"
+														fileLimitMessage="#{mensaje.solo1Archivo}"
+														label="#{mensaje.busquePqrs}" required="true"
+														mode="advanced" update=":form:messages, pnlCargado"
+														auto="true" sizeLimit="1000000"
+														requiredMessage="#{mensaje.infoRequerida}"
+														invalidSizeMessage="#{mensaje.excede}"
+														invalidFileMessage="#{mensaje.extensionIncorrecta}"
+														allowTypes="/(\.|\/)(pdf|doc|docx|jpg|jpeg|jp?g|gif|png|JPG|JP?G|GIF|PNG)$/" />
+
+
+													<p:outputLabel
+														value="#{administrarContenido.pqr.tFile.fileName}"
+														rendered="#{administrarContenido.pqr.archivo != null}" />
+
+													<p:commandLink value="#{mensaje.limpiar}"
+														style="font-weight:bold; font-size:14px"
+														action="#{administrarContenido.limpiarArchivoCargado()}"
+														process="@this" update="pnlCargado"
+														rendered="#{administrarContenido.pqr.archivo != null}" />
+
+													<p:graphicImage value="imagenes/ayuda.png"
+														id="ayudaCargarArchivo" />
+													<p:tooltip value="#{mensaje.soloExtension}"
+														trackMouse="true" for="ayudaCargarArchivo" />
+												</p:panelGrid>
+
+
+											</p:outputPanel>
+
+											<p:spacer width="1" />
+											<p:message for="txtCorreo" />
+											<p:spacer width="1" />
+											<p:message for="lstPosee" />
+											<p:spacer width="1" />
+											<p:spacer width="1" />
+
+
+
+										</p:panelGrid>
+										<br />
+										<p:panelGrid style="width:100%" columns="1" cellpadding="0"
+											cellspacing="0" styleClass="ui-panelgrid-blank">
+
+											<p:outputLabel value="#{mensaje.descripcionPqr}"
+												style="font-weight:bold; font-size:14px" />
+
+											<p:inputTextarea id="txtDescripcion" rows="7" required="true"
+												value="#{administrarContenido.pqr.descripcion}"
+												label="#{mensaje.descripcionPqr}"
+												style="width:100%; font-size:14px" />
+
+
+											<p:message for="txtDescripcion" />
+
+										</p:panelGrid>
+
+										<br />
+
+										<div
+											class="moto-widget moto-widget-button moto-preset-default moto-align-center"
+											data-preset="default" data-align="center">
+
+
+											<p:commandButton value="#{mensaje.enviar}" id="btnEnviar"
+												class="moto-widget-button-link moto-size-medium"
+												action="#{administrarContenido.enviarPqrs()}"
+												process=":form" update=":form" />
+
+											<p:blockUI block=":form" trigger="btnEnviar">
+
+												<p:graphicImage value="imagenes/cargando.gif" />
+
+
+											</p:blockUI>
+
+
+										</div>
+
+
+
+									</p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			</section>
+		</h:form>
+	</ui:define>
+</ui:composition>

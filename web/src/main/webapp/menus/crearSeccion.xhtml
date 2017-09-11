@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/plantillas/principal.xhtml">
+
+	<ui:define name="body">
+		<h:form id="form">
+			<p:growl id="messages" showDetail="true" globalOnly="true" />
+
+<br/>
+
+			<div class="row x_title">
+				<div class="col-md-6">
+
+					<h2 class="project-title">Secciones de la página Inicio</h2>
+
+				</div>
+			</div>
+
+			<div align="center" class="titulo"></div>
+			<p:outputPanel id="pnlCasoUso">
+
+				<p:spacer height="30" />
+				<p:accordionPanel id="pnlDtlSecciones">
+					<p:tab title="#{mensaje.listadoSecciones}" titleStyle="font-size:16px"
+						closable="true">
+
+						<p:dataTable var="loc" id="dtlSecciones" widgetVar="dtlRegistros"
+							value="#{administrarContenido.secciones}" reflow="true" rows="10"
+							paginator="true" paginatorPosition="bottom" 
+							draggableColumns="true"
+							emptyMessage="#{mensaje.noExistenciaRegistros}">
+
+
+
+
+							<f:facet name="header">
+								<p:outputPanel style="text-align:right">
+									<p:inputText id="globalFilter" immediate="true"
+										onkeyup="PF('dtlRegistros').filter()"
+										style="width:300px; height:10px"
+										placeholder="#{mensaje.palabrasClave}" />
+								</p:outputPanel>
+							</f:facet>
+							
+							<p:column headerText="#"
+								filterBy="#{loc.id}" filterMatchMode="contains"
+								filterStyle="display:none" sortBy="#{loc.id}"
+								style="font-size:14px; width:30px">
+								<p:outputLabel value="#{loc.id}"
+									style="font-weight:normal; font-size:12px" />
+							</p:column>
+
+
+							<p:column headerText="#{mensaje.nombreIdentificacion}"
+								filterBy="#{loc.nombreIdentificacion}" filterMatchMode="contains"
+								filterStyle="display:none" sortBy="#{loc.nombreIdentificacion}"
+								style="font-size:14px">
+								<p:outputLabel value="#{loc.nombreIdentificacion}"
+									style="font-weight:normal; font-size:12px" />
+							</p:column>
+
+
+
+
+
+							<p:column headerText="#{mensaje.acciones}"
+								style="font-size:14px; text-align:center;">
+
+
+								<p:commandButton id="btnIrEditar"
+									style="background-origin: content-box; background-image: url('../imagenes/editar.png'); background-size: cover; background-repeat:no-repeat; width:16px; height:16px; vertical-align:bottom; border:0; background-color:transparent"
+									action="#{administrarContenido.asignarSeccion(loc,'MODAL_EDITAR_SECCION')}"
+									value="" process=":form:pnlDtlSecciones" update=":formEditar" />
+
+
+								<p:tooltip for="btnIrEditar" value="#{mensaje.editar}"
+									trackMouse="true" />
+
+
+							
+
+
+
+
+
+							</p:column>
+
+
+
+						</p:dataTable>
+					
+
+
+					</p:tab>
+				</p:accordionPanel>
+
+			</p:outputPanel>
+		</h:form>
+
+		<ui:include src="/menus/editarSeccion.xhtml" />
+	
+   
+
+
+		<p:spacer height="1000" />
+
+
+	</ui:define>
+</ui:composition>

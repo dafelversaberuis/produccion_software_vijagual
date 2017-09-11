@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+	<meta name="author" content="Quimerapps" />
+	<title>#{mensaje.nombrePagina}</title>
+	<meta name="description" content="#{mensaje.nombrePagina}" />
+	<meta name="keywords" content="#{mensaje.nombrePagina}" />
+	<link
+		href='http://fonts.googleapis.com/css?family=Roboto:100,300,300italic,400,700|Julius+Sans+One|Roboto+Condensed:300,400'
+		rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="/web/plantillas/css/style.css" />
+	<link rel="stylesheet" href="/web/plantillas/css/grid.css" />
+	<link rel="stylesheet" href="/web/plantillas/css/layout.css" />
+	<link rel="stylesheet" href="/web/plantillas/css/fontello.css" />
+	<link rel="stylesheet" href="/web/plantillas/css/animation.css" />
+	<link rel="stylesheet"
+		href="/web/plantillas/js/fancybox/jquery.fancybox.css" />
+	<script src="/web/plantillas/js/jquery.modernizr.js"></script>
+	<style type="text/css">
+.ui-growl-title {
+	font: 14px "Lucida Console", Monaco, monospace;
+}
+
+.ui-growl-message p {
+	font: 16px "Lucida Console", Monaco, monospace;
+}
+</style>
+</h:head>
+
+<body data-spy="scroll" data-target="#navigation" class="page-template">
+	<div class="loader"></div>
+	<header id="header"> <h:form id="formCliente">
+		<p:remoteCommand name="onload"
+			action="#{administrarSesionCliente.getNologueoPersonal()}"
+			autoRun="true" />
+
+		<div class="header-in">
+
+			<h1 id="logo" style="font-size: 0 !important;">
+				<a href="/web/home.jsf"><img
+					src="/web/mt-demo/55800/55854/mt-content/uploads/2015/11/1.png"
+					alt="Vijagual software" /> </a>
+			</h1>
+
+			<a id="responsive-nav-button" class="responsive-nav-button" href="#"></a>
+
+			<nav id="navigation" class="navigation">
+
+			<ul>
+<!--
+				<li><p:commandLink value="#{mensaje.fotosBaners}"
+						title="#{mensaje.seccionesPagPrincipal}"
+						action="/menus/crearFotoBaner.xhtml?faces-redirect=true"
+						ajax="false" /></li>
+-->
+
+				<li><p:commandLink value="#{mensaje.seccionesPagPrincipal}"
+						title="#{mensaje.seccionesPagPrincipal}"
+						action="/menus/crearSeccion.xhtml?faces-redirect=true"
+						ajax="false" /></li>
+
+				<li><p:commandLink value="#{mensaje.menus}"
+						title="#{mensaje.menus}"
+						action="/menus/crearMenu.xhtml?faces-redirect=true" ajax="false" /></li>
+
+				<li><p:commandLink value="#{mensaje.administradores}"
+						title="#{mensaje.administradores}"
+						action="/personal/crearAdministrador.xhtml?faces-redirect=true"
+						ajax="false" /></li>
+
+
+
+
+
+
+
+				<li class="current-menu-item"><p:commandLink
+						value="#{administrarSesionCliente.personalSesion.nombreCompleto} #{mensaje.cerrarSesion}"
+						ajax="false" title="#{mensaje.cerrarSesion}"
+						action="#{administrarSesionCliente.getCerrarSesion()}" /></li>
+
+
+			</ul>
+
+			</nav>
+		</div>
+	</h:form> </header>
+	<div id="wrapper" align="center">
+
+		<div style="width: 90%;" align="left">
+			<br /> <br /> <br /> <br />
+			<ui:insert name="body" />
+			<br /> <br /> <br />
+
+		</div>
+		<footer id="footer"> <section class="section parallax ">
+		FRIGORÍFICO VIJAGUAL<br />
+		#{mensaje.disenadoPor} </section> </footer>
+	</div>
+
+
+
+	<script src="/web/plantillas/js/jquery.queryloader2.js"></script>
+	<script src="/web/plantillas/js/jquery.easing.1.3.min.js"></script>
+	<script src="/web/plantillas/js/jquery.cycle.all.min.js"></script>
+	<script src="/web/plantillas/js/jquery.smoothscroll.js"></script>
+	<script src="/web/plantillas/js/waypoints.min.js"></script>
+
+
+	<script src="/web/plantillas/js/fancybox/jquery.fancybox.pack.js"></script>
+	<script src="/web/plantillas/js/config.js"></script>
+	<script src="/web/plantillas/js/custom.js"></script>
+
+
+</body>
+</html>

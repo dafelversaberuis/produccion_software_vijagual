@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="formEditarSubMenu">
+
+		<p:dialog header="#{mensaje.editarSubMenu}" width="950" height="500"
+			widgetVar="panelEdicionSubMenu" resizable="true" closable="false"
+			responsive="true">
+			<p:panel id="pnlEditarSubMenu">
+
+				<p:panelGrid columns="2" cellpadding="0" cellspacing="0"
+					style="width:100%" styleClass="ui-panelgrid-blank" layout="grid">
+
+
+					<p:outputLabel for="txtTitulo" value="#{mensaje.tituloMenu}"
+						style="font-weight:bold; font-size:14px" />
+					<p:inputText id="txtTitulo"
+						value="#{administrarContenido.submenuTransaccion.titulo}"
+						required="true" label="#{mensaje.tituloMenu}"
+						style="width:100%; font-size:14px; height:10px" />
+
+					<p:spacer width="1" />
+					<p:message for="txtTitulo" />
+
+					<p:outputLabel for="txtTituloIngles"
+						value="#{mensaje.tituloMenuIngles}"
+						style="font-weight:bold; font-size:14px" />
+					<p:inputText id="txtTituloIngles"
+						value="#{administrarContenido.submenuTransaccion.tituloIngles}"
+						label="#{mensaje.tituloMenuIngles}"
+						style="width:100%; font-size:14px; height:10px" />
+
+
+
+					<p:spacer width="1" />
+					<p:message for="txtTituloIngles" />
+
+					<p:outputLabel for="lstVigencia" value="#{mensaje.estado}"
+						style="font-weight:bold; font-size:14px" />
+
+					<p:selectOneMenu label="#{mensaje.estado}"
+						style="width:100%; font-size:14px" id="lstVigencia"
+						value="#{administrarContenido.submenuTransaccion.indicativoVigencia}"
+						required="true">
+						<f:selectItems value="#{consultarFuncionesAPI.itemsEstados}" />
+					</p:selectOneMenu>
+					<p:spacer width="1" />
+					<p:message for="lstVigencia" />
+
+
+
+
+
+
+				</p:panelGrid>
+				<p:panelGrid columns="1" cellpadding="0" cellspacing="0"
+					style="width:100%" styleClass="ui-panelgrid-blank" layout="grid">
+
+
+
+
+					<p:outputLabel for="txtContenido" value="#{mensaje.contenido}"
+						style="font-weight:bold; font-size:14px; " />
+
+
+
+					<p:editor
+						value="#{administrarContenido.submenuTransaccion.contenido}"
+						id="txtContenido" required="true"
+						style="width:100%; font-size:14px;" />
+
+					<p:spacer width="1" />
+
+
+					<p:message for="txtContenido" />
+
+					<p:outputLabel for="txtContenidoIngles"
+						value="#{mensaje.contenidoIngles}"
+						style="font-weight:bold; font-size:14px; " />
+
+					<p:editor
+						value="#{administrarContenido.submenuTransaccion.contenidoIngles}"
+						style="width:100%; font-size:14px;" id="txtContenidoIngles" />
+
+
+					<p:spacer width="1" />
+
+					<p:message for="txtContenidoIngles" />
+
+
+				</p:panelGrid>
+				<br />
+				<div align="center">
+					<p:commandButton id="btnEditarSubMenu" style="font-size:14px"
+						action="#{administrarContenido.editarSubMenu()}"
+						value="#{mensaje.editar}"
+						process=":formEditarSubMenu:pnlEditarSubMenu"
+						update=":formEditarSubMenu:pnlEditarSubMenu, :formSubMenu:pnlSubMenu, :form:messages" />
+					<p:spacer width="10" />
+					<p:commandButton id="btnCancelarEdicionSubMenu"
+						style="font-size:14px; font-weight: normal !important;"
+						action="#{administrarContenido.cancelarSubMenuTransaccion('MODAL_EDITAR_SUBMENU')}"
+						process="@this" value="#{mensaje.cancelar}"
+						update=":formSubMenu:pnlSubMenu">
+						<p:resetInput
+							target=":formEditarSubMenu, :formSubMenu:pnlSubMenu, :form:messages" />
+					</p:commandButton>
+
+				</div>
+
+				<p:outputLabel value="#{mensaje.informacionRequerida}"
+					style="font-size:10px" />
+				<p:blockUI block=":formEditarSubMenu:pnlEditarSubMenu"
+					trigger="btnEditarSubMenu, btnCancelarEdicionSubMenu">
+					<p:graphicImage value="../imagenes/cargando.gif" />
+				</p:blockUI>
+
+			</p:panel>
+		</p:dialog>
+
+
+	</h:form>
+</ui:composition>
