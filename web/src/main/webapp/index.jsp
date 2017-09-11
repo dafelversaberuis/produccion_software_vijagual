@@ -12,14 +12,14 @@
 
 
 <meta charset="utf-8">
-<title>FRIFORÍFICO VIJAGUAL</title>
+<title>FRIGORÍFICO VIJAGUAL</title>
 <link rel="SHORTCUT ICON"
 	href="/web/mt-demo/55800/55854/mt-content/uploads/2015/11/favicon5d58.ico?_build=1483642918"
 	type="image/vnd.microsoft.icon" />
 
 
-<meta name="keywords" content="FRIFORÍFICO VIJAGUAL" />
-<meta name="robots" content="FRIFORÍFICO VIJAGUAL" />
+<meta name="keywords" content="FRIGORÍFICO VIJAGUAL" />
+<meta name="robots" content="FRIGORÍFICO VIJAGUAL" />
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
