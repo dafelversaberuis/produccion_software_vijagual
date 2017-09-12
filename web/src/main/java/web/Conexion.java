@@ -34,7 +34,7 @@ public class Conexion implements Serializable {
 		try {
 
 			// **************openshuftV3********************
-			String DB_driver = "org.postgresql.Driver";
+			String DB_driver = "org.postgresql.Driver";  
 
 			String url = "jdbc:postgresql://postgresql:5432/produccion_vijagual";
 			String username = "dannypipe_vijagual";
@@ -44,9 +44,9 @@ public class Conexion implements Serializable {
 			// ***************************************
 
 			// *********Datasource_local***************************
-//			InitialContext ctx = new InitialContext();
-//			DataSource ds = (DataSource) ctx.lookup("java:/vijagualDS");
-//			con = ds.getConnection();
+			// InitialContext ctx = new InitialContext();
+			// DataSource ds = (DataSource) ctx.lookup("java:/vijagualDS");
+			// con = ds.getConnection();
 			// ***************************************************
 
 			// **************openshuftV2********************

@@ -146,10 +146,18 @@
 									class="moto-widget-menu-list moto-widget-menu-list_horizontal">
 
 
+										
+									<!--correo -->
+
+									<li class="moto-widget-menu-item"><a
+										href="https://email.secureserver.net" data-action="page"
+										class="moto-widget-menu-link moto-widget-menu-link-level-1 moto-widget-menu-link-active moto-link"><span class="fa fa-envelope"/></a>
+									</li>
+
 									<!-- menu inicio -->
 									<li class="moto-widget-menu-item"><a
 										href="index.jsp?i=<%=idioma%>" data-action="page"
-										class="moto-widget-menu-link moto-widget-menu-link-level-1 moto-widget-menu-link-active moto-link"><%=idioma.equals("es") ? "*INICIO" : "*HOME"%></a>
+										class="moto-widget-menu-link moto-widget-menu-link-level-1 moto-link"><%=idioma.equals("es") ? "*INICIO" : "*HOME"%></a>
 									</li>
 
 
