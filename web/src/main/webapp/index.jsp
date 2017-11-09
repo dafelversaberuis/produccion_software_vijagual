@@ -148,13 +148,13 @@
 
 										
 									<!--correo -->
-									<li class="moto-widget-menu-item"><a
+									<li class="moto-widget-menu-item"><a target="_blank"
 											href="https://190.107.17.74:2096/webmaillogout.cgi"
 											data-action="page"
 											class="moto-widget-menu-link moto-widget-menu-link-level-1 moto-widget-menu-link-active moto-link"
 											style="color: blue"><span class="fa fa-envelope" /></a></li>
 
-										<li class="moto-widget-menu-item" title=""><a
+										<li class="moto-widget-menu-item" title=""><a target="_blank"
 											href="https://email.secureserver.net" data-action="page"
 											class="moto-widget-menu-link moto-widget-menu-link-level-1 moto-widget-menu-link-active moto-link"
 											style="color: red"><span class="fa fa-envelope" /></a></li>
