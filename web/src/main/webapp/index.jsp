@@ -148,11 +148,16 @@
 
 										
 									<!--correo -->
-
 									<li class="moto-widget-menu-item"><a
-										href="https://email.secureserver.net" data-action="page"
-										class="moto-widget-menu-link moto-widget-menu-link-level-1 moto-widget-menu-link-active moto-link"><span class="fa fa-envelope"/></a>
-									</li>
+											href="https://190.107.17.74:2096/webmaillogout.cgi"
+											data-action="page"
+											class="moto-widget-menu-link moto-widget-menu-link-level-1 moto-widget-menu-link-active moto-link"
+											style="color: blue"><span class="fa fa-envelope" /></a></li>
+
+										<li class="moto-widget-menu-item" title=""><a
+											href="https://email.secureserver.net" data-action="page"
+											class="moto-widget-menu-link moto-widget-menu-link-level-1 moto-widget-menu-link-active moto-link"
+											style="color: red"><span class="fa fa-envelope" /></a></li>
 
 									<!-- menu inicio -->
 									<li class="moto-widget-menu-item"><a

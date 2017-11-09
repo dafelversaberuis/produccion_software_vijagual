@@ -5778,6 +5778,11 @@ body {
   text-decoration: underline;
   background-color: transparent;
 }
+.moto-widget-menu.moto-preset-default .moto-widget-menu-list .moto-widget-menu-item .moto-widget-menu-link-level-1.moto-widget-menu-link-active2 {
+  color: #ee3135;
+  text-decoration: underline;
+  background-color: transparent;
+}
 .moto-widget-menu.moto-preset-default .moto-widget-menu-list .moto-widget-menu-item .moto-widget-menu-link-level-1.moto-widget-menu-link-active:hover {
   color: #42403c;
   background-color: #b8b4ac;
@@ -5916,6 +5921,12 @@ body {
   background-color: #000000;
 }
 .moto-widget-menu.moto-preset-2 .moto-widget-menu-sublist .moto-widget-menu-item .moto-widget-menu-link.moto-widget-menu-link-active {
+  color: #ee3135;
+  text-decoration: none;
+  background-color: transparent;
+  border-color: transparent;
+}
+.moto-widget-menu.moto-preset-2 .moto-widget-menu-sublist .moto-widget-menu-item .moto-widget-menu-link.moto-widget-menu-link-active2 {
   color: #ee3135;
   text-decoration: none;
   background-color: transparent;
