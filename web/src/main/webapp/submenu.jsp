@@ -160,6 +160,12 @@
 											href="https://email.secureserver.net" data-action="page"
 											class="moto-widget-menu-link moto-widget-menu-link-level-1 moto-widget-menu-link-active moto-link"
 											style="color: red"><span class="fa fa-envelope" /></a></li>
+											
+											
+										<li class="moto-widget-menu-item" title=""><a target="_blank"
+											href="https://181.225.78.198" data-action="page" title="VPN"
+											class="moto-widget-menu-link moto-widget-menu-link-level-1 moto-widget-menu-link-active moto-link"
+											style="color: brown"><span class="fa fa-random" /></a></li>	
 
 									<!-- menu inicio -->
 									<li class="moto-widget-menu-item"><a
