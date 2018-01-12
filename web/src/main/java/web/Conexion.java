@@ -39,7 +39,7 @@ public class Conexion implements Serializable {
 			String url = "jdbc:postgresql://postgresql:5432/produccion_vijagual";
 			String username = "dannypipe_vijagual";
 			String password = "meli0523_vijagual";
-			
+			 
 			Class.forName(DB_driver);
 			con = DriverManager.getConnection(url, username, password);
 			// ***************************************
