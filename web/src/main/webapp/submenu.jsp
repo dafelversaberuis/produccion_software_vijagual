@@ -265,14 +265,14 @@
 
 										</ul></li>
 
-
+<!--
 									<li class="moto-widget-menu-item"><a
 										href="/web/submenu.jsp?id=<%=id%>&i=<%=idioma.equals("es") ? "en" : "es"%>"
 										data-action="page"
 										class="moto-widget-menu-link moto-widget-menu-link-level-1 moto-link"><%=idioma.equals("es") ? "ENGLISH VERSION" : "VERSIÓN ESPAÑOL"%></a>
 
 									</li>
-
+-->
 
 
 

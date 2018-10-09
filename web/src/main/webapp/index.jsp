@@ -265,7 +265,7 @@
 
 										</ul></li>
 
-
+<!-- 
 									<li class="moto-widget-menu-item"><a
 										href="/web/index.jsp?i=<%=idioma.equals("es") ? "en" : "es"%>"
 										data-action="page"
@@ -273,7 +273,7 @@
 
 									</li>
 
-
+-->
 
 
 
