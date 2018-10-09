@@ -3,7 +3,6 @@ package web;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +10,9 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 import web.generales.IConstantes;
 
@@ -40,8 +42,8 @@ public class Conexion implements Serializable {
 			String username = "dannypipe_vijagual";
 			String password = "meli0523_vijagual";
 			 
-			Class.forName(DB_driver);
-			con = DriverManager.getConnection(url, username, password);
+//			Class.forName(DB_driver);
+//			con = DriverManager.getConnection(url, username, password);
 			// ***************************************
 
 			// *********Datasource_local***************************
